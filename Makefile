@@ -31,3 +31,7 @@ build:
 			-w /go/src/github.com/pottava/aws-s3-proxy \
 			supinf/go-gox:1.11 --osarch "linux/amd64 darwin/amd64 windows/amd64" \
 			-ldflags "-s -w" -output "dist/{{.OS}}_{{.Arch}}"
+
+docker_build:
+	@docker build -t stevelacy/s3-proxy:v1.0.0 .\
+		&& docker push stevelacy/s3-proxy:v1.0.0

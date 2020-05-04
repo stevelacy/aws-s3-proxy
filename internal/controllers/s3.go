@@ -202,11 +202,14 @@ func convertToMaps(s3output *s3.ListObjectsOutput, prefix string) ([]string, map
 func toHTML(files []string, updatedAt map[string]time.Time) string {
 	html := "<!DOCTYPE html><html><body><ul>"
 	for _, file := range files {
-		html += "<li><a href=\"" + file + "\">" + file + "</a>"
-		if timestamp, ok := updatedAt[file]; ok {
-			html += " " + timestamp.Format(time.RFC3339)
+		if strings.Contains(file, ".7z") {
+
+			html += "<li><a href=\"" + file + "\">" + file + "</a>"
+			if timestamp, ok := updatedAt[file]; ok {
+				html += " " + timestamp.Format(time.RFC3339)
+			}
+			html += "</li>"
 		}
-		html += "</li>"
 	}
 	return html + "</ul></body></html>"
 }
